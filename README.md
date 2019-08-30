@@ -1,43 +1,36 @@
 [![](https://ituacm.com/wp-content/uploads/2017/12/fb-tes-720p-1024x576.png)](https://ituacm.com/wp-content/uploads/2017/12/fb-tes-720p-1024x576.png)
 
-### Instructors
+### Instructor
 
-**Your Name and Surname**
+**Deniz Bashgoren**
 
-*Computer Engineering #4 @I.T.U*
+*Electronics and Communication Engineering #2 @I.T.U*
 
-[*LinkedIn*](https://www.linkedin.com/in/)
-
-**Your Name and Surname**
-
-*Computer Engineering #3 @I.T.U*
-
-[*LinkedIn*](https://www.linkedin.com/in/)
-
+[*LinkedIn*](https://www.linkedin.com/in/deniz-basgoren)
 
 ### Prerequisities
-1. Basic knowledge about any programming language.
-2. so on...
+1. None
 
-### Goal
-
-goals about program...
+### Goals
+* Learn basic programming concepts (types, variables, functions, loops, objects etc.)
+* Solve basic programming problems (searching, sorting, mapping, filtering, reducing)
+* Learn making 2D games using Javascript (ES6), and p5.js Library
 
 ### Syllabus
 
 |  #Date |  #Topic  | #Description  |
 | :------------: | :------------: | :------------: |
-| 1 September 2019 | Basit javascript, React Native kurulumu ve react native eğitimi. | React Native kurulumunda yardım, basit seviyede ES6, ES7 anlatımı, React Native tarihçesi, çalışma prensibi ve basit giriş |
-| 1 September 2019  | React Native egitimine devam.  | React Native projelerinin genel hiyerarşisi, Componentler ve Kütüphaneler  |
-| 1 September 2019  |  Exchange Rate App baslangic.  | Projeye başlangıç. Kullanışlı Componentler ve API çağırmaları hakkında genel bilgiler  |
-| 1 September 2019  |  Exchange Rate App e navigation ekleme.  | React Navigation kütüphanesi hakkında genel bilgiler  |
-| 1 September 2019  |Exchange Rate App design.  | Component tasarımı hakkında genel bilgiler  |
-| 1 September 2019  |  React ve Flutter hakkinda kisa bilgiler. |  Play Store'a uygulama deploylama, Frontend için kullanılan React ve başka bir Cross-Platform olan Flutter hakkınfa kısa bilgiler |
+| ??? 2019 | Javascript I: Types, Variables, Conditionals | Basic terminology: editor, compiler, interpreter, console. Using JS console. Data types: Numbers, Strings... Variables. If-Else blocks. |
+| ??? 2019  | Javascript II: Loops, Functions  | Loops: for, while. Functions: alert, prompt, confirm. Writing new functions.  |
+| ??? 2019  | Javascript III: Arrays, Objects  | Arrays: 1D, 2D arrays. Objects: creating, reading, updating, deleting. References: Passing by value vs. Passing by reference.  |
+| ??? 2019  | P5 Library I: Shapes, Colors  | Overview of P5 library: drawing shapes, using colors, RGB vs. HSL, using text and fonts. Images: loading, updating, saving. Tutorial: Fractal Art.  |
+| ??? 2019  | P5 Library II: Events, Pong | Events: load, resize, mouse, keyboard, touch, sensors (accelerometer, orientation). Tutorial: Pong Game Clone.  |
+| ??? 2019  |  P5 Library III: Audio, Flappy Bird | Audio: loading, playing, looping. Saving data with LocalForage. Tutorial: Flappy Bird Game Clone. |
 
 
-<p align="center"><b>Lessons will be around 1:30 - 2 hours</b></p>
+<p align="center"><b>Lectures will last 2 hours</b></p>
 
-(Lectures will be in ITU Faculty of Chemical and Metallurgical Engineering classroom D205 at every Thursday 17.30)
+(Lectures will be in ITU Faculty of ??? classroom ??? on every ??? from ??? to ???)
 
 # Important Links
 
