@@ -1,4 +1,7 @@
-[![](https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/600px-JavaScript-logo.png)
+
+
+
 
 ### Instructor
 
