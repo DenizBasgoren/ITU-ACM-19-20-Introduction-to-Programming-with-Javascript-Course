@@ -40,11 +40,11 @@
 
 * Javascript Pratik Problemleri: [Link](https://denizbasgoren.github.io/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/js)
 * Fraktal Ağaç: [Demo](https://denizbasgoren.github.io/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/fractal) ·
-[Github](https://github.com/denizbasgoren/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/fractal)
+[Github](https://github.com/denizbasgoren/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/tree/master/fractal)
 * Pong Oyunu: [Demo](https://denizbasgoren.github.io/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/pong) ·
-[Github](https://github.com/denizbasgoren/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/pong)
+[Github](https://github.com/denizbasgoren/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/tree/master/pong)
 * Flappy Bird Oyunu: [Demo](https://denizbasgoren.github.io/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/flappy) ·
-[Github](https://github.com/denizbasgoren/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/flappy)
+[Github](https://github.com/denizbasgoren/ITU-ACM-19-20-Introduction-to-Programming-with-Javascript-Course/tree/master/flappy)
 
 # Suggested Readings
 
