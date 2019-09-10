@@ -1,0 +1,151 @@
+
+Nesneler (Object) nedir
+Birbiriyle bağlantılı değişkenler, bir isim altında birleştirilebilirler. Örneğin iki boyutlu oyunda bütün varlıkların x,y,z değişkenleri vardır. Bu durumda her bir oyun karakteri için en az üç değişkene ihtiyaç duyulacaktır: oyuncuX, oyuncuY, oyuncuZ gibi. Üç değişken kullanmak yerine bir dizi kullanmak mantıklı olabilir: oyuncu[0], oyuncu[1] ve oyuncu[2] bu değişkenleri temsil edebilir. Bu yaklaşım bir öncekine göre daha tercih edilesi olsa da, bunun da sorunları vardır. En önemlisi, kod okunurluğundan kaybetmektedir, yani oyuncu[1] dendiğinde y koordinatının kastedilmesi okunurluğu zorlaştırır. Bu gibi bir durumda bir nesne kullanmak mantıklıdır.
+Yukarıdaki örnekte oyuncu isimli bir nesne, ve onun altında x,y,z isimli üç değişken birleştirilebilir. Javascriptte bu şöyle yazılır:
+
+let oyuncu = {x: 100, y:200, z:300}
+
+Daha sonra bu değişkenlere ulaşmak için nokta notasyonu veya parantez notasyonu kullanılabilir.
+
+Nokta notasyonu:
+oyuncu.x // 100
+oyuncu.y // 200
+oyuncu.z // 300
+
+Parantez notasyonu:
+oyuncu['x'] // 100
+oyuncu['y'] // 200
+oyuncu['z'] // 300
+
+Not: parantez notasyonuna dikkat edin, oyuncu[x] ile oyuncu['x'] aynı değildir. Birincisinde x bir değişkendir, ikincisinde bir stringdir. Örn
+
+let insan = {isim: 'deniz', yas: 21}
+let isim = 'yas'
+
+insan.isim // 'deniz'
+insan['isim'] // 'deniz'
+insan[isim] // 21
+
+
+Nesnelere yazma:
+Örn
+
+let oyuncu = {}
+oyuncu.x = 100
+oyuncu.y = 200
+oyuncu['z'] = 300
+
+
+Nesnelerin değişkenleri herhangi birşey olabilir.
+let oyuncu = {}
+oyuncu.x = 5 // sayi
+oyuncu.tur = 'koylu' // string
+oyuncu.esyalar = ['kilic', 'kalkan'] // dizi
+oyuncu.kole = {isim: 'Zeno', can: 1} // baska bir nesne
+oyuncu.yuru = function yuru () { ... } // fonksiyon
+
+
+
+Çok önemli: Nesnelerin parantez notasyonu dizilerin notasyonuna benzemektedir. Bu bir tesadüf değildir. DIZILER BIR NESNEDIR. Diziler, değişkenleri 0,1,2... olan birer nesnedir. Örn
+
+let a = [100,200,300]
+a[0] // 100
+let b = {0:100, 1:200, 2:300}
+b[0] // 100
+
+
+Dizileri parametre olarak atmak
+Aşağıdaki fonksiyon parametre olarak bir obje alıp, onun y koordinatı ile oynamaktadır.
+
+function ileriYuru( obje) {
+    obje.y++
+    return obje
+}
+
+let oyuncu = {isim: 'ali', y: 200}
+oyuncu = ileriYuru(oyuncu)
+oyuncu.y // 201
+
+
+Fonksiyonları parametre olarak atmak
+Aşağıdaki örnekte bir fonksiyon parametre olarak atılıp, fonksiyonun içinde çağırılmaktadır.
+
+function fonksiyonCagirmaFonksiyonu ( a ) {
+    a()
+}
+
+function birFonksiyon () {
+    console.log('merhaba')
+}
+
+fonksiyonCagirmaFonksiyonu( birFonksiyon )
+// 'merhaba'
+
+
+Parametre olarak atilan fonksiyonu ard arda uc kere calistiran fonksiyon:
+function ucKereCalistir( a ) {
+    a()
+    a()
+    a()
+}
+
+
+
+
+Pass by reference problemi
+
+let a = [1,2,3]
+let b = a
+b[1] = 100
+a[1] // 100
+
+"dizi = dizi" satırı, normal değişkenlerde çalıştığından farklı çalışır. b = a dendiğinde, a dizisindeki bütün değerlerin b'ye kopyalanmasını bekleriz fakat böyle çalışmazlar. b = a dediğinizde, b ve a, aynı dizinin iki farklı adı olurlar. Yani b[1] = 100 yaptığınızda a[1] = 100 olmuş oldu. b ile a artık aynı dizi. Biri değiştirilirse, diğeri de etkilenir. Buna pass by reference denir. Eğer beklediğimiz gibi bütün değerler kopyalansaydı pass by value olacaktı.
+Javascriptte değişkenler pass by value ile, nesneler (ve dolayisiyla diziler) pass by reference ile çalışır. Bu durum, javascripte has bir durum değildir. Çoğu dilde böyledir.
+
+let a = [1,2,3]
+
+function fonk (b) {
+    b[1] = 100
+}
+
+fonk(a)
+a // [1,100,3]
+
+
+Nesneler ile bir ornek:
+
+let a = {isim: 'deniz'}
+let b = {isim: 'mehmet'}
+
+b = a
+a.isim = 'ahmet'
+b.isim // 'ahmet'
+
+
+
+Ikinci bir ornek:
+function ileriYuru( obje) {
+    obje.y++
+}
+
+let oyuncu = {isim: 'ali', y: 200}
+ileriYuru(oyuncu)
+oyuncu.y // 201
+
+
+
+Nesneler ile son bir ornek:
+let a = {isim: 'deniz'}
+let b = {isim: 'ahmet'}
+
+b.abisi = a
+a.kardesi = b
+
+a.kardesi.abisi.kardesi.abisi // 'deniz'
+
+
+Diziler ile son bir ornek:
+let a = ['kilic']
+a[1] = a
+
+a[1][1][1][0] // 'kilic'

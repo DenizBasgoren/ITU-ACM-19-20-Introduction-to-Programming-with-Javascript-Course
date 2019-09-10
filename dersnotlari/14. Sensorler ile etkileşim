@@ -1,0 +1,41 @@
+
+Hareket sensörü ile telefonun hangi tarafa hareket ettirildiğini, dönme sensörü ile de telefonun hangi tarafa yatık/dönük olduğunu bulabilirsiniz. Bu sensorler için 3 boyutlu koordinat sistemi şu şekildedir:
+
+
+    *****************
+    *   TELEFONUN   *
+    *   ON YUZU     *
+    *               *
+    *               *
+    *               *
+    *       Z       *------------- X
+    *               *
+    *               *
+    *               *
+    *               *
+    *               *
+    *****************
+            |
+            |
+            |
+            |
+            Y
+
+
+Önemli değişkenler:
+-   deviceOrientation: Telefon yatay duruyorsa "landscape", dikey duruyorsa "portrait", anlaşılamıyor ise "undefined"
+-   accelerationX, accelerationY, accelerationZ: Hareket hızı.
+-   pAccelerationX, pAccelerationY, pAccelerationZ: Bir önceki hareket hızı.
+-   rotationX, rotationY, rotationZ: Ilgili koordinatlara göre açı.
+-   pRotationX, pRotationY, pRotationZ: Bir önceki açı.
+-   turnAxis: En son 90 derece kadar hangi yöne döndürüldü? "X", "Y", "Z" den birini alır.
+
+Önemli eventler:
+-   deviceMoved: Cihaz belli miktar kadar hareket ettirilirse çağırılır.
+-   deviceShaken: Cihaz belli miktar kadar sallanırsa çağırılır.
+-   deviceTurned: Cihaz 90 derece döndürülürse çağırılır.
+
+Önemli fonksiyonlar:
+-   setMoveThreshold: hareket eventinin çağırılması için gerekli miktar hareketi belirler. Ilk değeri 0.5
+-   setShakeThreshold: sallama eventinin çağırılması için gerekli miktar sallamayı belirler. Ilk değer 30
+

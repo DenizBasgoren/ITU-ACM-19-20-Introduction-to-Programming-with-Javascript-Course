@@ -1,0 +1,106 @@
+
+Blocking Thread
+preload, setup ve draw fonksiyonlarından oluşan tipik bir p5 programı şu şekilde çalışır:
+1. üç fonksiyonun dışındaki yerlerdeki kod çalışır. Burada genelde global değişkenler tanımlanır ve ilk değerleri atanır.
+2. preload fonksiyonu çalışır. Burada, sitenin dışından gelmesi beklenen resim, ses dosyası, font, ve diğer bütün dosyalar loadSound, loadImage, loadFont fonksiyonlarıyla çağırılır. Bu esnada ekranda Loading... yazısı vardır.
+3. setup fonksiyonu çalışır. Burada, p5 değişkenleri ve fonksiyonlarını kullanabiliriz.
+4. draw fonksiyonu her x saniyede bir çalışır.
+
+Önemli: draw fonksiyonu bitince hemen tekrar çalıştırılmaz. Genelde 10-20 ms beklenir. Bu bekleme süresi içinde, diğer çalışan bütün programlar sırayla çalışır. Bilgisayarda bütün programlar bu şekilde sıra sıra 0-1 ms boyunca çalışır, sonra kontrolü sıradaki programa verir. 20 ms sonra tekrar kontrolu ister ve çalışır. 
+
+Eğer bu 10-20 ms bekleme süresi olmasaydı, mesela while döngüsü ile aralıksız aynı program çalışsaydı, diğer programlar hiç çalışma fırsatı bulamayacaktı. Ve eğer sistem için önemli bir program çalışma fırsatı bulamazsa bilgisayar çalışmayı bırakabilir. Fakat günümüz işletim sistemleri bu gibi durumlara karşı önlem alınarak inşa edildiği için, sonsuz while döngüsü durumunda bile sistem bir şekilde çalışmaya devam eder, ve bu problemli programı zorla durdurur.
+
+Önemli: Her javascript programında aynı anda sadece bir fonksiyon çalışabilir. Kod satır satır okunur. Eğer örn bu fonksiyonda bir sonsuz döngü varsa, sıradaki fonksiyonlar çalışamaz, ve program komple durur. Buna blocking thread / single thread denir.
+
+
+Event Stack:
+Her javascript programının içinde bir "event stack" vardır. Event stack, bir zamanlayıcıdır ve orada, hangi fonksiyonun hangi anda çalışacağı yazar. örn
+
+fonksiyon adı       kaç ms sonra
+----------------------------------
+setup               şuanda
+draw                1 ms sonra
+draw                21 ms sonra
+draw                41 ms sonra
+
+Yukarıdaki örnek tipik bir p5 programına aittir. Önce setup çalışır, daha sonra draw fonksiyonunun çalışacağı anlar yazılıdır. 41 ms geçtikten sonra p5, drawın yeni çalışma saatlerini girer (61 ms sonra, 81 ms sonra ...) ve liste güncellenir.
+
+Durum yukarıdaki tabloda iken, diyelim bir "event" ateşlendi, mesela, fareyle biryere basıldı. Fareyle biryere basıldığı anda mouseClicked fonksiyonu event stacke kaydedilir.
+
+fonksiyon adı       kaç ms sonra
+----------------------------------
+setup               şuanda
+mouseClicked        1 ms sonra
+draw                1 ms sonra
+draw                21 ms sonra
+draw                41 ms sonra
+
+Önemli: Fareyle biryere basıldığında mouseClicked fonksiyonu hemen çalışmaz. Event stack'de sırasını bekler. O an çalışan fonksiyonun bitmesi beklenir.
+
+
+Resize event (Ekran boyutu değiştiğinde ateşlenen event):
+Eğer herhangi bir anda ekran boyutu değiştirilirse, windowResized fonksiyonu event stack'e kaydedilir. Bilinmesi gereken önemli değişkenler:
+
+- width: canvasın eni
+- height: canvasın boyu
+- windowWidth: pencerenin eni
+- windowHeight: pencerenin boyu
+
+Aşağıdaki kod, bu dört değişkenin nasıl değiştiğini görmenizi sağlar:
+
+
+function setup() {
+    createCanvas(800,600)
+    textSize(50)
+}
+
+function draw() {
+    background('yellow')
+    text('width: ' + width, 50,50)
+    text('height: ' + height, 50,100)
+    text('windowWidth: ' + windowWidth, 50,150)
+    text('windowHeight: ' + windowHeight, 50,200)
+}
+
+
+Aşağıdaki örnekte, ekran boyutu değiştiğinde otomatik olarak büyüyen/küçülen program var:
+
+HTML:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <script src="p5.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+
+JS:
+
+function setup() {
+    createCanvas(windowWidth,windowHeight)
+    textSize(50)
+}
+
+function draw() {
+    background('yellow')
+    text('width: ' + width, 50,50)
+    text('height: ' + height, 50,100)
+    text('windowWidth: ' + windowWidth, 50,150)
+    text('windowHeight: ' + windowHeight, 50,200)
+}
+
+function windowResized( ) {
+    resizeCanvas(windowWidth, windowHeight)
+}

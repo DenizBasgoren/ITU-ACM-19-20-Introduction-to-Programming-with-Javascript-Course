@@ -1,0 +1,251 @@
+
+rect, quad ve triangle fonksiyonları parametre olarak hep x ve y koordinatı alıyorlar. Yani bir üçgeni belirlemek için açı, kenar uzunluğu vs belirtmek yerine köşelerin x,y koorinatlarını belirtmemiz lazım. Noktalarla çok uğraşacağımız için x,y değişkenlerini beraber tutabiliriz. Bundan sonra x,y değişkenlerini ayrı tutmak yerine { x: 100, y: 200 } şeklindeki objelerin içinde tutacağız.
+
+Fraktalın tekrarlanan kısımlarına birer harf verelim. Önce elimizde (a,b,c,d) karesi var. Bundan (a,b,e) üçgenini elde edeceğiz. Üçgenden de (f,g,e,a) ve (h,i,e,b) karelerini elde edeceğiz. Sonra bu iki kareyi (a,b,c,d) karesi gibi kullanarak tekrar üçgenler bulacağız. 
+
+                g           h
+               ╱ ╲         ╱ ╲
+             ╱     ╲     ╱     ╲
+         f ╱         ╲e╱         ╲ i
+           ╲         ╱ ╲         ╱
+             ╲     ╱     ╲     ╱
+               ╲ ╱         ╲ ╱
+                a ━━━━━━━━━ b
+                ┃           ┃
+                ┃           ┃
+                ┃           ┃
+                ┃           ┃
+                d ━━━━━━━━━ c
+
+
+Bu sayıları hesaplamak için iki önemli matematiksel fonksiyona ihtiyacımız var:
+(a,b,c,d) => (a,b,e) kareden ucgene
+(a,b,e) => (f,g,e,a,h,i,b) ucgenden karelere
+
+Bu fonksiyonları yazmamızı kolaylaştıracak üç yardımcı fonksiyonu tanımlamakla başlayalım:
+
+function toplama(a, b) {
+    return {
+        x: a.x + b.x,
+        y: a.y + b.y
+    }
+}
+
+function cikarma(a, b) {
+    return {
+        x: a.x - b.x,
+        y: a.y - b.y
+    }
+}
+
+function katsayi(a, k) {
+    return {
+        x: a.x * k,
+        y: a.y * k
+    }
+}
+
+Toplama, çıkarma ve katsayıyla çarpma fonksiyonları, vektör işlemlerimizi yapmamızı kolaylaştıracak. Artık asıl yazmak istediğimiz karedenUcgene ve ucgendenKarelere fonksiyonlarını yazabiliriz.
+
+function karedenUcgene(a, b, c, d) {
+    let e = cikarma(b, d)
+    e = katsayi(e, .5)
+    e = toplama(a, e)
+
+    return [a, b, e]
+}
+
+İlki daha kolay olduğu için karedenUcgene fonksiyonuyla başladık. return olarak üç değişken veremeyeceğimiz için üçünü bir diziye koyup verdik. Ilk üç satır, okunması kolay olsun diye alt alta yazıldı, fakat pekala şu şekilde de yazılabilirdi:
+let e = toplama(a, katsayi( cikarma(b,d), .5))
+
+Bundan sonra her üçgen, üç noktadan oluşan bir diziyle ifade edilecek. Üçgeni üç noktayla temsil ettiğimiz için, bu dizinin uzunluğu herzaman 3tür. Kareleri de 4 noktalı dizi şeklinde ifade edeceğiz. Bu dizinin de uzunluğu, yani length değişkeni hep 4tür. Böylece, dizinin uzunluğuna bakarak üçgen mi kare mi olduğuna karar verebiliriz.
+
+function ucgendenKarelere(a, b, e) {
+    let f = cikarma(e, b)
+    f = toplama(a, f)
+
+    let g = cikarma(e, b)
+    g = toplama(e, g)
+
+    let h = cikarma(e, a)
+    h = toplama(e, h)
+
+    let i = cikarma(e, a)
+    i = toplama(b, i)
+
+    return [[f, g, e, a], [h, i, b, e]]
+}
+
+Bu fonksiyon biraz daha karmaşık, çünkü bu sefer fonksiyonun iki kare vermesi lazım. Fakat return ile sadece bir şey döndürebildiğimiz için iki kareyi bir dizinin içine koyup verdik. Her kare de kendi başına bir dizi (anlaştığımız üzere), ve 4er noktadan oluşuyorlar. Her bir nokta da, x ve y değişkenlerini içeren bir obje.
+
+
+Önemli: Eğer yukarıda toplama, çıkarma ve katsayı fonksiyonlarını yazmamış olsaydık, ana fonksiyonlarımız çok daha uzun ve okunamayacak kadar karışık olacaktı. Bu yüzden, tekrarlanacak işlemleri önceden tespit edip yardımcı fonksiyonlar yazmak, kodun okunurluğunu arttırır, ayrıca olası hataları önler.
+
+
+Programı çalıştırdığımız anda, elimizde önce bir kare olacak. Sonra,
+* ilk iterasyonda, kareyi üçgene çevireceğiz. Elde bir üçgen olacak.
+* ikinci iterasyonda, eldeki üçgeni iki kareye çevireceğiz.
+* üçüncü iterasyonda, eldeki iki kareyi iki üçgene çevireceğiz.
+* dördüncü iterasyonda, iki üçgeni dört kareye çevireceğiz.
+...
+
+Gerçek fraktallarda bu iterasyon sayısı sonsuzdur. Fakat bilgisayarın sonsuza kadar çalışması, fiziki engellerden dolayı mümkün değildir. Biz iterasyon sayısını 30 olarak belirleyelim. 30 iterasyonun sonunda döngüyü durduracağız.
+
+Iki önemli global değişken tanımlayalım: iterasyon ve elimizdeki şekiller. Aynı zamanda ilk değerleri de atayalım:
+
+let iterasyon = 0
+let cizilecekler = []
+
+Ilk başta elimizde bir kare var. Onu cizileceklerin arasına koyalım.
+
+let ilkkare = [
+    {x: 350, y:400},
+    {x: 450, y:400},
+    {x: 450, y:500},
+    {x: 350, y:500},
+]
+
+cizilecekler = [ilkkare]
+
+
+
+Her iterasyon arası geçişte, elimizdeki kareler üçgenlere, üçgenler de karelere çevirilmeli. Bu yüzden, sıradaki işimiz, sonrakileriHesapla fonksiyonunu tanımlamak.
+
+function sonrakileriHesapla() {
+    let yeniler = []
+
+    for (let i = 0; i<cizilecekler.length; i++) {
+        let simdiki = cizilecekler[i]
+
+        // kareyse bir ucgen ver
+        if (simdiki.length == 4) {
+            yeniler[ yeniler.length ] = karedenUcgene( simdiki[0], simdiki[1], simdiki[2], simdiki[3] )
+        }
+        
+        // ucgense iki kare ver
+        else {
+            let kareler = ucgendenKarelere( simdiki[0], simdiki[1], simdiki[2] )
+            yeniler [ yeniler.length ] = kareler[0]
+            yeniler [ yeniler.length ] = kareler[1]
+        }
+    }
+
+    cizilecekler = yeniler
+}
+
+
+Bu fonksiyon saf bir fonksiyon değildir, çünkü sonucu return ile vermek yerine cizilecekler değişkeninin üstüne yazıyor. Ayrıca, cizilecekler değişkenini parametre olarak almayıp, direk kullanıyor. Böyle bir fonksiyon, eğer elimizde cizdirilecekler değişkeni olmasaydı hata verirdi, fakat biz bu fonksiyonu sadece tek bir programda kullanacağımız için böyle yapmakta sakınca yok.
+
+
+Sıradaki fonksiyonumuz, çizdirilecekler dizisini alıp, oradaki şekilleri gerçekten ekrana çizmekle görevli fonksiyon olacak. Her iterasyonda bunu kullanacağız.
+
+function hepsiniCiz() {
+    for (let i = 0; i<cizilecekler.length; i++) {
+        let simdiki = cizilecekler[i]
+
+        // ucgense
+        if (simdiki.length == 3) {
+            triangle( simdiki[0].x, simdiki[0].y,
+                simdiki[1].x, simdiki[1].y,
+                simdiki[2].x, simdiki[2].y)
+        }
+        // kareyse
+        else {
+            quad( simdiki[0].x, simdiki[0].y,
+                simdiki[1].x, simdiki[1].y,
+                simdiki[2].x, simdiki[2].y,
+                simdiki[3].x, simdiki[3].y)
+        }
+
+    }
+}
+
+
+Program artık çalışır durumda. setup ile draw fonksiyonlarını tanımladıktan sonra programı çalıştırabiliriz.
+
+function setup() {
+    createCanvas(800, 600)
+    frameRate(20)
+}
+
+function draw() {
+
+    hepsiniCiz()
+    sonrakileriHesapla()
+    iterasyon++
+
+    if (iterasyon > 30) {
+        noLoop()
+    }
+    
+}
+
+
+Ağaç renksiz olduğu için renklerle oynamamız lazım. Bütün ağacın da aynı renkte olmasını istemiyoruz: gövde kahverengi tonları, ve yapraklar yeşilin tonlarında olmalı.
+
+function renkVer () {
+    if (iterasyon <= 5) {
+        return [160, 80, 0]
+    }
+    else {
+        return [80, 250, 0]
+    }
+}
+
+
+Ve hepsiniCiz fonksiyonunu güncelleyelim:
+
+function hepsiniCiz() {
+    for (let i = 0; i<cizilecekler.length; i++) {
+        let simdiki = cizilecekler[i]
+        
+        let renk = color( renkVer() )
+        fill(renk)
+        stroke(renk)
+
+        // ucgense
+        if (simdiki.length == 3) {
+            triangle( simdiki[0].x, simdiki[0].y,
+                simdiki[1].x, simdiki[1].y,
+                simdiki[2].x, simdiki[2].y)
+        }
+        // kareyse
+        else {
+            quad( simdiki[0].x, simdiki[0].y,
+                simdiki[1].x, simdiki[1].y,
+                simdiki[2].x, simdiki[2].y,
+                simdiki[3].x, simdiki[3].y)
+        }
+
+    }
+}
+
+
+
+Ağaç çok kısa olduğu için gövdesini biraz uzatmak için alt tarafına ayrıca bir kare çizelim.
+
+
+function setup() {
+    createCanvas(800, 600)
+    frameRate(20)
+
+    let renk = color( renkVer() )
+    fill(renk)
+    stroke(renk)
+    rect(350, 500, 100, 100)
+}
+
+
+Son hamle olarak, renkleri, iterasyona bağlı birer değişken yapalım. Yani, ağaç sadece iki renkten oluşmasın, her iterasyondaki renkler farklı olsun:
+
+function renkVer () {
+    if (iterasyon <= 5) {
+        return [160-iterasyon*12, 80-iterasyon*12, 0]
+    }
+    else if (iterasyon > 5 && iterasyon <= 20) {
+        return [80-iterasyon*4, 250-iterasyon*4, 0]
+    }
+    else {
+        return [0, 250-iterasyon*4, 0]
+    }
+}

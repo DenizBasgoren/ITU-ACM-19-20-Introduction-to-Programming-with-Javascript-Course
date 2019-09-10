@@ -1,0 +1,58 @@
+
+Fare ile ilgili önemli değişkenler:
+
+- mouseX, mouseY: imlecin, canvasa göre konumu. Burada (0,0) canvasın sol üst noktası.
+- pmouseX, pmouseY: imlecin, canvasa göre, bir önceki konumu. Farenin hızını bulmada kullanılır.
+- winMouseX, winMouseY: imlecin, pencereye göre konumu. (0,0) yine sol üst köşe.
+- pwinMouseX, pwinMouseY: bir önceki konum.
+
+- mouseIsPressed: Eğer o anda farenin herhangi bir düğmesi basılıysa true verir.
+- mouseButton: En son basılan fare düğmesi. Sol: 'left', sağ: 'right', orta: 'center', hiçbiri: 0.
+
+Fare ile ilgili önemli eventler:
+
+- mouseMoved: Imleç hareket ettirilince çağırılır.
+- mousePressed: Farenin bir düğmesine basılınca çağırılır.
+- mouseReleased: Farenin bir düğmesi bırakılınca çağırılır.
+- mouseClicked: Farenin bir düğmesi basılıp bırakılınca çağırılır.
+- doubleClicked: Çift tıklayınca çağırılır.
+- mouseWheel(e): Farenin tekeri döndürülünce çağırılır.
+
+Fareyle ilgili etkileşimleri özetleyen bir örnek:
+
+
+function setup () {
+    createCanvas(windowWidth, windowHeight)
+    frameRate(20)
+    textSize(200)
+    noStroke()
+    textAlign(CENTER)
+}
+
+function draw() {
+    background( 256-dist(mouseX, mouseY, pmouseX, pmouseY) )
+
+    if (mouseIsPressed) {
+        fill('green')
+        circle(mouseX, mouseY, 50)
+    }
+    else {
+        fill('red')
+        circle(mouseX, mouseY, 20)
+    }
+}
+
+function mouseWheel( ev ) {
+    fill( 256-abs(ev.delta) )
+
+    if (ev.delta < 0) {
+        rect(0,0, width, height/10)
+    }
+    else {
+        rect(0,height *0.9, width, height/10)
+    }
+}
+
+function doubleClicked () {
+    text( 'Tık!', width/2, height/2)
+}

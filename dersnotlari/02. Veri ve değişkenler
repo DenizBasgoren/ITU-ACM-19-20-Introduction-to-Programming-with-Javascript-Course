@@ -1,0 +1,222 @@
+
+Javascript kodunun parçaları
+1- Veri (Data)
+2- Operatörler
+2- Değişkenler (Variables)
+3- Bloklar
+4- Yorumlar (Comments)
+
+örnek kod: https://github.com/DenizBasgoren/chess/blob/master/game.js
+
+
+Veri:
+Örneğin marionun x, y koordinatları: 300, 20 sayıları sayı türü veridir.
+Örneğin instagramda bir arkadaşınıza yazdığınız "naber" yazısı, kelime türü veridir. (ing string)
+Örneğin bir arkadaşınızın instagramda fotoğrafınızı beğenmiş olup olmaması, boolean türü bir veridir. Boolean türü veri yalnızca True, False dur.
+
+En sık rastlanan veri türleri:
+- Sayılar: 40, 10, 30.66, 10+10, 10e5, 0x120
+- Kelimeler: "Hello", "a", "10", 'Hey', `Yo man`
+- Booleanlar: true, false
+- Diziler: [100,200], [3,4,5,6,7.1]
+- Objeler: { isim: "hacı", not: 100 }, { isim: "durdu", not: 50 }
+
+
+Operatörler:
++ - * / ^ % vs
+
+Değişkenler:
+Veriye verilen isimdir.
+Örn. mario oyununda marionun x,y koordinatlarının verisi, marioX, marioY isimli değişkenlerde tutulabilir.
+Örn. facebookta bir arkadaşınızla olan yazışmalarınız mesajlar isimli bir değişkende tutulabilir.
+örn. bir oyundaki puanınız highScore isimli değişkende tutulabilir.
+örn. facebookta online olup olmamanız haci_is_online isimli bir değişkende tutulabilir.
+
+Bir program çalıştığı esnada, ekrana ne çizeceğini, hafızada tuttuğu Değişkenlere bakarak belirler. Programın her durumu değişkenlerden anlaşılır olmalıdır. Örn eğer mario oyununda x,y koordinatları için değişken yoksa program marioyu nereye çizeceğini bilemez.
+
+Örn. ekranda hareket eden kırmızı, 100x100 boyutlarındaki bir kare için:
+- içinde sayı tutan x değişkeni
+- içinde sayı tutan y değişkeni
+- karenin rengi "kırmızı" kelimesi, renk isimli bir değişkende tutulabilir. Fakat bu veri hiç değişmeyeceği için değişkene ihtiyaç yoktur.
+- karenin boyutları en ve boy isimli iki değişkende tutulabilir. Fakat bu sayılar hiç değişmeyeceği için değişkene ihtiyaç yoktur.
+- karenin hareket etme hızı v isimli bir değişkende tutulabilir. Fakat bu da değişmediği için değişken kullanmak zorunlu değildir.
+
+Değeri değişmeyen veriler için sabitler kullanılabilir.
+
+Hangi değişkenler kullanılmalı?
+
+Örn. sayaç.
+- sure değişkeni (sayı)
+- sayiyor değişkeni (boolean)
+
+Örn. hesap makinesi. https://chen86860.github.io/calc/
+- sayi (kelime)
+
+örn. hesap makinesi 2. https://www.alexandrahoefinger.com/js-calculator/index.html
+- birincisayi (sayı)
+- operator (kelime)
+- ikincisayi (sayı)
+
+Örn XOX oyunu https://codepen.io/vasanthkay/pen/KVzYzG
+- 3'e 3'lük dizi. sadece "x", "o", "boş" değerlerini alabilir.
+- sira. (kelime veya boolean).
+
+örn Yılan oyunu. https://youtu.be/OBBrp43TX3A
+- yılanX dizisi
+- yılanY dizisi
+- yon (kelime "yukarı", "asagı", "saga", "sola")
+- meyveX, meyveY
+
+örn. Flappy bird oyunu. https://youtu.be/fQoJZuBwrkU
+Birinci yontem: kus saga dogru hareket eder, borular sabit. Kamera kusla beraber saga dogru ilerler.
+- kusX, kusY, kusDY, skor (sayılar)
+- borularAltBosluk, borularUstBosluk (diziler)
+
+Ikinci yontem: kus sadece yukarı asagı hareket eder. Borular sola dogru hareket eder.
+- kusY, kusDY, skor (sayılar)
+- borularX, borularAltBosluk, borularUstBosluk (diziler)
+
+
+Bloklar nedir?
+blokAdı (...) { ... } şeklindeki yapılardır. Ne olduklarına ileride detaylıca değinileceltir.
+Onemlileri:
+
+- if bloğu: içindeki kodun sadece bir koşul sağlanırsa çalışır.
+- for bloğu: içindeki kod birkaç defa tekrarlanır.
+- while bloğu: içindeki kod, belli bir koşul sağlanana kadar tekrar tekrar çalışır.
+- fonksiyonlar: kodun bir parçasına isim verilmesidir.
+- try catch bloğu: içindeki kod hata verirse programın birşey olmamış gibi devam etmesini sağlar.
+
+
+Yorumlar nedir?
+Programcıların kodun arasına koyduğu, ve bilgisayarın okumasını istemediği yazılardır.
+- Örn bir programcı yazdığı karmaşık kod parçasının nasıl çalıştığını yorum şeklinde yazabilir. Daha sonra bu yorum, o kodu okuyan başka programcılara yardımcı olur.
+- Örn programcı yazdığı kodda bir hata yapmıştır ve hata yaptığı yerde kendine not düşmek için yorum bırakabilir.
+- Örn bir kod parçası çalışmıyordur, ve programın çalışması için o kod parçasının silinmesi lazımdır. Fakat programcı o kodu zar zor yazdığı için silmek istemiyordur. Kodu yorum yaparak bilgisayarın orayı okumamasını sağlayabilir.
+
+Yorum nasıl bırakılır?
+Herhangi bir satırda // işaretinin sağıdaki herşey yorum sayılır.
+/* ile */ arasında yazılan herşey yorum olarak kabul edilir.
+Örn
+
+let x = 100 // x burada yatay koordinat
+let score = 0
+// oyuncu sıfır skorla başlar
+
+/*
+Deniz Basgoren tarafından yazıldı 2019
+*/
+
+
+Değişkenler nasıl kullanılır?
+Bir değişken ile 4 şey yapılabilir.
+1- Değişken var edilebilir.
+2- Değişkene bir veri kaydedilebilir.
+3- Değişkenin verisi okunabilir.
+4- Değişkendeki veri değiştirilebilir.
+
+
+Değişken nasıl var edilir?
+önce let yazıp, yanına değişkenin adını yazın. Örn
+let skor
+let hp
+let sıcaklık
+
+Aynı satırda birden fazla değişken var edilmek istenebilir. Örn
+let isim, soyisim, birinciVize, ikinciVize, final, harfNotu
+let x, y
+
+
+Değişkene veri nasıl kaydedilir?
+değişken adı = veri şeklinde veri kaydedilir. Örn
+skor = 1000
+hp = 0.98
+sıcaklık = 30
+isim = "Hacı"
+evli = true
+
+
+Değişken aynı satırda var edilip bir veri alabilir. Örn
+let pi = 3
+let g = 9.81
+let isim = "Deniz", yaş = 22, okul = "ITU"
+
+
+Değişkenden veri nasıl okunur?
+Değişkenin adı yazılarak içindeki veri okunabilir.Örn
+isim
+yaş
+
+
+Bir değişkenin içindeki veri alınıp, başka bir değişkenin içine koyulmak istenebilir.
+let bakiye = 10000
+let ogul = bakiye / 2
+bakiye = bakiye - bakiye / 2
+
+
+Üstteki program adım adım şöyle çalışır:
+let bakiye
+bakiye = 10000
+let ogul
+ogul = bakiye / 2
+ogul = 10000 / 2
+ogul = 5000
+bakiye = bakiye - bakiye / 2
+bakiye = 10000 - 10000 / 2
+bakiye = 10000 - 5000
+bakiye = 5000
+
+Program bittikten sonra ogul 5000 ve bakiye 5000 dir.
+
+
+Not: Javascript işlem önceliğine dikkat eder. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+
+
+Sayı arttırma ve azaltma:
+let a = 10
+a = a+1
+// artik a = 11.
+a = a-1
+// artik a = 10.
+
+Bu işlem (arttırma ve azaltma) o kadar sık kullanılır ki, bunun için ayrı operatörler mevcut.
+
+a = a + 5 // yerine
+a += 5
+
+a = a - 10 // yerine
+a -= 10
+
+a = a + 1 // yerine
+a++
+
+a = a - 1 // yerine
+a--
+
+
+
+Soru: Eger elimizde a, b değişkenleri varsa nasıl a'daki veri b'ye ve b'deki veri a'ya aktarılabilir?
+
+let a = 123456789, b = 4939291949
+// verilmis olsun
+
+let c // gecici değişken
+
+// a nın bir kopyasını oluştur
+c = a
+
+// artık c'nin içinde a'nın içinde olan var. a boşaltılabilir
+a = b
+
+// b aktarıldı. şimdi a'nın içindekini b'ye atalım
+b = c
+
+
+
+
+Soru: Eger elimizde r varsa, ve r bir kürenin hacmini temsil ediyorsa, hacim nasıl hesaplanabilir?
+let r = 5 // verilmis olsun
+let pi = 3.14, hacim
+
+hacim = 4/3 * pi * r ** 3
+

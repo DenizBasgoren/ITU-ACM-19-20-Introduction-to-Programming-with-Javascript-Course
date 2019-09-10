@@ -1,0 +1,88 @@
+
+Tanımlar
+Kaynak kodu (Source code): Programcının yazdığı kod. Herhangi bir dilde olabilir.
+Derlenmiş kod (Compiled code, machine code): Bir derleyicinin, kaynak kodunu alıp derleyip verdiği dosya. Bu dosya, bilgisayar tarafından çalıştırılmaya hazırdır. Bir diğer adı makine kodu.
+Derleyici (Compiler): Kaynak kodunu alıp derlenmiş koda çeviren program. Bu derlenmiş kod bir dosya içine konur ve kullanıcıya geri verilir.
+Editör: Kaynak kodunu yazmak için kullanılan herhangi bir programdır. Notepad gibi basit, VS Code gibi gelişmiş olabilir.
+
+Not:
+MS Word vb renkli, altı çizilmiş yazı yazılabilen programlar editör değildir! Onlarla yazılan dosyalar kaynak kodu sayılmazlar.
+
+Derleme şekilleri:
+1. Derleme (Compilation): Kaynak kodunu bir dosya şeklinde alır, üzerinde değişiklik yapmaz. Yeni bir dosyada kodu makine koduna çevirir, ve kullanıcıya verir.
+2. Interpretation: Kaynak kodu parça parça alınır (genelde satır satır), onu makine koduna çevirip, hemen ardından çalıştırır. Sonuç olarak bir makine kodu dosyası vermez.
+3. ByteCode yöntemi: Iki adımlı derlemedir. Birinci adımda kod ara forma çevirilir. Ikinci adımda, başka bir derleyici ara formu makine koduna çevirir.
+
+Derlemeli diller: C, C++ ...
+Interpreted diller: Python, Javascript ...
+Bytecode yöntemiyle çalışan diller: C#, Java ...
+
+Not: Java ile Javascript (Dersin odağı) tamamen farklı dillerdir. Isimlerinin benzer olmasının sebebi bir pazarlama taktiğiydi.
+
+Onemli: Bir dilin birden fazla derleyicisi olabilir ve hepsi, kaynak kodunu farklı bir şekilde algılayıp, farklı makine koduna çevirirler. Örneğin GCC ile derlenmiş C kodu çok hızlı çalışırken, TurboCC ile derlenmiş aynı C kodu yavaş çalışabilir, hatta hiç çalışmayabilir.
+
+Onemli: Websiteleri, html, css ve javascript dilleriyle yazılan programlardır. Web tarayıcıları bu 3 dilin kodunu interprete edip sonucu kullanıcıya verir.
+
+Her tarayıcı ayrı bir şirket tarafından yazıldığı için kaynak kodunu aynı şekilde makine koduna çevirmeleri beklenemez. Bu yüzden bazı tarayıcılar (Internet explorer) kodu düzgün algılayamayıp beklenmeyen sonuçlar verirler.
+
+2019 itibariyle en çok tercih edilen tarayıcılar:
+- Chrome
+- Firefox
+- Safari
+- Edge
+
+Javascript, websitelerin yazıldığı dildir. Interprete edilen diller grubuna girer. Interpreteri web tarayıcılarıdır. Javascript kodunu internetten indirip, daha sonra interprete edip, oluşan görüntüyü (websitesini) ekrana verirler.
+
+Javascriptin avantajları
+- Programcı bir derleyici kullanmak zorunda kalmaz, çünkü web tarayıcıları herkesin bilgisayarında var
+- Programcı programını paylaşmak için kullanıcılarından programı yüklemelerini istemez. Javascript kodunu paylaşmak için sadece websitesinin adresini (ing. URL) paylaşması yeterlidir.
+- Çok esnek bir dildir. Bir satır kodla halledilmesi beklenen kod bir satırla halledilir.
+- Programcının bilmesi gerekmeyen bütün teknik detaylar programcıdan gizlenmiştir. Dolayısıyla programcı sadece yazdığı programın mantığına odaklanabilir.
+- Interprete edilen bir dil olduğu için program satır satır yazılabilir.
+
+
+Javascript kodu nasıl çalıştırılır
+1. Index.html adında dosya oluşturulur. Bu bir ayar dosyasıdır ve asıl kodu içermez. Html dosyasında yapılacak tek şey, çalıştırılacak js kodunun bilgisayarın neresinde olduğunu belirtmektir.
+2. Index.html içine alttaki kod kopyalanır. Bu kod tamamen kopyala-yapıştır kodudur ve ders boyunca üzerinde fazla değişiklik yapılmayacaktır.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Başlık</title>
+</head>
+<body>
+    
+    <script src="main.js"></script>
+
+</body>
+</html>
+
+
+3. Index.html nin yanına main.js dosyası oluşturulur.
+
+4. Içine kaynak kodu yazılır. Kaydedilir.
+
+5. Index.html dosyası web tarayıcısı ile çalıştırılır.
+
+
+
+Editör olarak Visual Studio Code kullanmanın avantajları:
+(NOT: Visual Studio değil, Visual Studio Code. Birincisi 4 gb iken ikincisi 50 mb boyutundadır.)
+- Kodda yanlış yazılan yerler kırmızıyla işaretlenir. Hataları bulmak kolaylaşır
+- Editor kodu kendisi tamamlayabilir.
+- Kod renklerle boyanabilir. Boyanınca nerenin bir fonksiyon, nerenin bir string olduğu daha rahat görülür
+
+
+Diğer populer editorler:
+- Atom
+- Sublime Text
+- Notepad++
+- Brackets
+
+
+IDE (Integrated Development Environment) nedir
+- Hem editör hem derleyici aynı programın iki parçasıysa o programa ide denir. Mesela ide ile kod yazılıp, tek bir tuşla yine aynı programın içindeyken derlenebilir ve sonucuna bakılabilir. Örn Matlab
+
+

@@ -1,0 +1,250 @@
+
+Kutuphaneler nedir?
+Javascript kodunu tek bir js dosyasında yazmak zorunda değiliz. Onu iki, üç ... dosyaya ayırabiliriz. Bu dosyalar sırasıyla, tek tek çalıştırılacaktır. Örneğin aşağıda üç js dosyasını htmlde belirterek çalıştırdık.
+
+<script src="birinci.js"></script>
+<script src="ikinci.js"></script>
+<script src="ucuncu.js"></script>
+
+Böyle yapmanın en önemli avantajlarından birisi, kodu kopyala yapıştır yapmadan, sadece dosyayı dahil ederek kullanabilmektir. Örneğin A kişisi kendi uzmanlık alanıyla ilgili bir fonksiyonu js dosyasına koyarak paylaşabilir. Bu dosyayı alan B kişisi sadece onun adını htmlye yazarak o fonksiyondan faydalanabilir. Paylaşılan bu kod dosyalarına "kütüphane" diyoruz. (ing library)
+
+kütüphaneler genellikle fonksiyonlardan oluşurlar. Kütüphane benzetmesinde de her js fonksiyonu bir "kitap", dosyanın tamamı da bir "kütüphanedir".
+
+Bir kütüphane programa iki şekilde dahil edilebilir. Ya internette biryerdedir: Bu durumda html'de dosyanın nerede olduğunu yazmamız gerekir. Örn https:fb.com/js/commentbutton.js Ikinci seçenek de, dahil edilecek kütüphanenin, html dosyasıyla aynı yerde durması. Bu durumda, sadece dosyanın adını yazarak o kütüphaneye erişebiliriz.
+
+
+Canvas nedir?
+Canvas, üzerine resim çizilen kağıda denir. Bilgisayar biliminde ise canvas, üzerine kare, yuvarlak gibi şekiller, resimler çizebileceğimiz bir penceredir. 2D, 3D oyunlar canvas ile yapılır.
+
+
+Canvas ile dörtgen çizme
+HTML:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width=500 height=500></canvas>
+    <script src="main.js"></script>
+</body>
+</html>
+
+JS:
+let canvas = document.getElementsByTagName('canvas')[0].getContext('2d')
+canvas.strokeRect(150,150,300,100)
+
+
+Görüldüğü gibi canvas ile dörtgen çizmek için fazladan kütüphaneye ihtiyaç duymadık. Canvası kullanmak kolay görünebilir, fakat canvası daha rahat kullanmak için çeşitli kütüphaneler yazıldı. Bunlardan biri de p5.js. Dersin devamında canvas kullanmak için canvasın kendi fonksiyonları yerine p5 fonksiyonlarını kullanacağız. O halde p5 ı önce htmlye dahil etmemiz lazım.
+
+
+Aynı örnek, p5 ile
+HTML:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="p5.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+
+JS:
+function setup() {
+    createCanvas(500,500)
+    rect(150,150,300,100)
+}
+
+
+
+Neden kodu setup fonksiyonunun içine yazdık?
+Bu, p5 kullanmanın getirdiği bir zorunluluktur. P5 bütün kendi fonksiyonlarını hazır ettikten sonra setup() ile setup fonksiyonunu çağırır.
+
+
+Şekil çizme:
+https://p5js.org/reference/ adresinden okuyabilirsiniz. arc(), ellipse(), circle(), line(), point(), quad(), rect(), square(), triangle() önemli fonksiyonlar.
+
+
+Not: y koordinatı bilgisayarlarda ekranın yukarısından başlayıp aşağı doğru giderken artar.
+
+Renkli şekiller:
+let c = color(...) kullanarak renk değişkeni elde edilebilir. Daha sonra bu renk değişkenini fill(c), stroke(c), background(c) içinde kullanabilirsiniz. https://www.quackit.com/css/css_color_codes.cfm adresinden bütün desteklenen isimli renkleri (css colors) görebilirsiniz.
+
+
+Renk uzayları:
+Çoğu şeye yetecek kadar isimli renk var, fakat yine de rengi kendiniz ayarlamak istiyorsanız RGB renk uzayını kullanabilirsiniz. Bilgisayarın görüntüleyebilidiği bütün renkler 3 sayıyla ifade edilebilirler: kırmızı, yeşil ve mavi. Yani, bütün renkleri bu üç rengin kombinasyonu olarak temsil edebiliriz.
+Örn, kırmızı=1 yeşil=1 mavi=0 ile sarı rengini elde ederiz. RGB renkleri için çoğu zaman 0-255 aralığı kullanılır, fakat bu colorMode( RGB, 1) fonksiyonu ile değiştirilebilir. Örn kırmızı kare için
+
+
+HSL renk uzayı:
+Her renk uzayında da her renk 3 farklı sayıyla ifade edilir. Bunlar hue (ton), saturation (doygunluk), lightness (parlaklık). Hue rengin tonunu belirler (kırmızı, yeşil, mavi vs). Saturation değeri maksimumdaysa renk canlı görünürken, azsa siyah görünür. Lightness parlaklığı belirler: maksimumdayken beyaz, minimumdayken siyah görünür.
+
+RGB ile karşılaştırması için: https://en.wikipedia.org/wiki/HSL_and_HSV
+
+
+Yazı yazma
+text() ile yazı yazılabilir. loadFont() ve textFont() ile yazı fontu değiştirilebilir. Örn yeni font ile yazı yazma:
+
+let font
+
+function preload() {
+    font = loadFont('font.ttf')
+}
+function setup() {
+    createCanvas(800,500)
+    textFont(font)
+    textSize(100)
+    fill('blue')
+    text('SkyNet is your friend', 50,100, 700, 400)
+    noFill()
+    rect(50,100,700,400)
+}
+
+Not: Fontlar, resimler ve diğer bütün dosyaları programınıza dahil ederken "cross origin policy" (cors) hatasıyla karşılaşabilirsiniz. Bu hata genellikle kendi bilgisayarınızda programınızı denerken ortaya çıkar, ve programınızı internete koyduktan sonra kaybolur. Kendi bilgisayarınızda Cors'u atlatmak için chrome'u cmd ile çalıştırmanız ve sonuna --allow-file-access-from-files iliştirmeniz lazım. Şöyle:
+
+C:\\...\Google-Chrome --allow-file-access-from-files
+
+
+
+Resim koyma:
+
+let resim
+
+function preload() {
+    resim = loadImage('../resources/canyon.jpg')
+}
+function setup() {
+    createCanvas(800,500)
+    image(resim,0,0,800,500)
+}
+
+
+Pikseller:
+Canvas aslında 3 boyutlu bir piksel dizisidir. Bir piksel, ekrandaki bir noktayı temsil eder. Her pikselin rengi, 4 sayıyla temsil edilir: R, G, B, A. RGB rengi, A da opaklığı belirler. Eğer A=0 ise piksel saydamdır ve kendi rengi yerine onun arkasındaki rengi (genellikle beyaz) görürsünüz. Eğer A=255 ise, tamamen opaktır ve RGB değerlerinden birini görürsünüz. Resimlerin A değeri önemlidir, çünkü bir resmin bazı yerlerinin saydam olmasını istersiniz.
+
+
+Resmi siyah beyaz yapma:
+Eğer bir pikselde RGB değerleri eşit ise, renk siyah-beyaz arası bir renktir. R=G=B=0 ise, renk siyahtir. Siyah beyaz yapmak istediğimiz piksel değerlerini RGB değerlerinin herhangi birine eşit yaparsak, örn, yeşil ve mavi değerlerini alıp yerlerine kırmızı değerini koyarsak, renk gri olur.
+
+let resim
+
+function preload() {
+    resim = loadImage('../resources/canyon.jpg')
+}
+
+function setup() {
+    createCanvas(800,500)
+    image(resim,0,0,800,500)
+
+    for (let i = 0; i<400; i++) {
+        for (let j = 0; j<500; j++) {
+            let piksel = get(i,j)
+            piksel[1] = piksel[0] // G = R
+            piksel[2] = piksel[0] // B = R
+            set(i,j, piksel)
+        }
+    }
+
+    updatePixels()
+}
+
+
+Resimde mavi olmayan renkleri sıyah-beyaz yapma:
+
+let resim
+
+function preload() {
+    resim = loadImage('../resources/canyon.jpg')
+}
+
+function setup() {
+    createCanvas(800,500)
+    image(resim,0,0,800,500)
+
+    for (let i = 0; i<800; i++) {
+        for (let j = 0; j<500; j++) {
+            let piksel = get(i,j)
+            let r = piksel[0], g = piksel[1], b = piksel[2]
+
+            if (!(b > g && b > r) ) { // not blue
+                piksel[1] = piksel[0] // G = R
+                piksel[2] = piksel[0] // B = R
+                set(i,j, piksel)
+            }
+            
+        }
+    }
+
+    updatePixels()
+}
+
+
+Resimde sari olmayan renkleri sıyah-beyaz yapma:
+
+let resim
+
+function preload() {
+    resim = loadImage('../resources/canyon.jpg')
+}
+
+function setup() {
+    createCanvas(800,500)
+    image(resim,0,0,800,500)
+
+    for (let i = 0; i<800; i++) {
+        for (let j = 0; j<500; j++) {
+            let piksel = get(i,j)
+            let r = piksel[0], g = piksel[1], b = piksel[2]
+
+            if (!(r > g && r > b) ) { // not red
+                piksel[1] = piksel[0] // G = R
+                piksel[2] = piksel[0] // B = R
+                set(i,j, piksel)
+            }
+            
+        }
+    }
+
+    updatePixels()
+}
+
+
+
+Resimde yesil olmayan renkleri sıyah-beyaz yapma:
+
+
+let resim
+
+function preload() {
+    resim = loadImage('../resources/golf.jpg')
+}
+
+function setup() {
+    createCanvas(800,500)
+    image(resim,0,0,800,500)
+
+    for (let i = 0; i<800; i++) {
+        for (let j = 0; j<500; j++) {
+            let piksel = get(i,j)
+            let r = piksel[0], g = piksel[1], b = piksel[2]
+
+            if (!(g > r && g > b) ) { // not green
+                piksel[1] = piksel[0] // G = R
+                piksel[2] = piksel[0] // B = R
+                set(i,j, piksel)
+            }
+            
+        }
+    }
+
+    updatePixels()
+}

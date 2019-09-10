@@ -1,0 +1,400 @@
+
+For bloğu nedir
+For bloğu, belli kodu tekrar tekrar çalıştmaya yarayan yapıdır. For döngüsü adıyla da bilinir. (ing. for loop) Örn ekrana 5 kere "Javascript" yazmak için kullanılabilir. Önce for kullanmadan:
+
+console.log('Javascript')
+console.log('Javascript')
+console.log('Javascript')
+console.log('Javascript')
+console.log('Javascript')
+
+Şimdi de for kullanarak:
+
+for (let i = 1; i <= 5; i++) {
+    console.log('Javascript')
+}
+
+For bloğu for yazısından, ardından ( ... ; ... ; ... ) şeklinde ayrılmış parantezden, ve ardından { ... } dan oluşur.
+
+for ( ilk durum; boolean koşul ; değişim) {
+    ... kod
+}
+
+Bilgisayar bir işlemi tekrar edecekse, işlemi kaç kere tekrar ettiğini sayması lazım. Bunun için bir değişken kullanır. Bu değişkenin ismi herhangi birşey olabilir, fakat genelde i,j,k kullanılır. Bu değişken ya for'un içinde ya for'un dışında tanımlanır.
+
+For'un içinde:
+for (let i = 1; i < 5 ; i++) {
+    ...
+}
+
+For'un dışında:
+let i = 1
+for ( ; i < 5 ; i++) {
+    ...
+}
+
+Aradaki fark:
+Eğer i for'un içinde tanımlandıysa, for'un dışında tanımsız sayılır. Eğer for'un dışında tanımlandıysa, for'un içinde de tanımlıdır. Her for için lazım olan bu değişken aslında sadece for'un içinde gereklidir. Bu yüzden i'nin for'un içinde tanımlanması daha çok tercih edilir.
+
+
+For indisini for'un içinde, ikinci bir amaçla kullanabiliriz. Örn, 1den 5e kadarki sayıları önce for'suz, sonra for ile yazalım.
+
+console.log(1)
+console.log(2)
+console.log(3)
+console.log(4)
+console.log(5)
+
+for (let i = 1; i <= 5; i++) {
+    console.log(i)
+}
+
+
+Bu kod adım adım şu şekilde çalışır.
+- i adında değişken yaratılır. 1 değeri atanır.
+- i <= 5 mi? Doğru. For'un içine gir.
+- console.log(i)
+- console.log(1) olur. Ekrana yazılır.
+- For blogu bitti. Başa dön.
+- i++ uygula. Artık i = 2.
+- i <= 5 mi? Doğru. 2 <= 5. For'un içine gir.
+- console.log(i)
+- console.log(2) olur. Ekrana yazılır.
+- For blogu bitti. Başa dön.
+- i++ uygula. Artık i = 3.
+- i <= 5 mi? Doğru. 3 <= 5. For'un içine gir.
+- console.log(i)
+- console.log(3) olur. Ekrana yazılır.
+- For blogu bitti. Başa dön.
+- i++ uygula. Artık i = 4.
+- i <= 5 mi? Doğru. 4 <= 5. For'un içine gir.
+- console.log(i)
+- console.log(4) olur. Ekrana yazılır.
+- For blogu bitti. Başa dön.
+- i++ uygula. Artık i = 5.
+- i <= 5 mi? Doğru. 5 <= 5. For'un içine gir.
+- console.log(i)
+- console.log(5) olur. Ekrana yazılır.
+- For blogu bitti. Başa dön.
+- i++ uygula. Artık i = 6.
+- i <= 5 mi? Yanlış. 6 <= 5 değil. For'u atla.
+
+
+Soru: Ekrana 2,4,6,8,10,12 yaz.
+
+for (let i = 1; i <= 6; i++) {
+    console.log( i*2 )
+}
+
+yada
+
+for (let i = 2; i <= 12; i+=2 ) {
+    console.log( i )
+}
+
+yada
+
+for (let i = 0; i < 6 ; i++) {
+    console.log( 2*i + 2)
+}
+
+
+
+Soru: 3 kere kullanıcıdan şifre sor. Eğer şifre doğruysa, kullanıcıyı selamla. Eğer 3 defa da yanlış girilmişse birdaha isteme. Şifre = qwerty
+
+let girilensifre
+for (let i = 0; i<3 ; i++) {
+    girilensifre = prompt('Sifreyi yaziniz:')
+
+    if (girilensifre == 'qwerty') {
+        alert('dogru sifre!')
+        break
+    }
+    else {
+
+    }
+}
+
+Break komutu, içinde bulunulan for bloğunu hemen bitirmek için kullanılır. Doğru şifre 1. defada girilmişse artık 2. ve 3. sefer şifre sormaya gerek yoktur. Bu yüzden break ile for bloğu bitirilir.
+
+
+
+Soru: 7ye, 8e, ve 9a tam bölünen üç basamaklı sayıyı bulunuz.
+
+for (let i = 100; i<1000; i++) {
+    if (i%7==0 && i%8==0 && i%9==0) {
+        alert('Bulundu!')
+        alert(i)
+    }
+}
+
+Eğer sadece bir sayı bulunmasını istiyorsak, o sayı bulunduktan sonra aramayı durdurabiliriz. Bunun için break kullanılabilir.
+
+for (let i = 100; i<1000; i++) {
+    if (i%7==0 && i%8==0 && i%9==0) {
+        alert('Bulundu!')
+        alert(i)
+        break
+    }
+}
+
+
+String birleştirme (concatenation):
+Yukarıdaki kodda "Bulundu: 504" yazılmasını isteseydik, "Bulundu" yazısıyla i değişkenindeki veriyi birleştirebilirdik.
+
+for (let i = 100; i<1000; i++) {
+    if (i%7==0 && i%8==0 && i%9==0) {
+        alert('Bulundu: ' + i)
+        break
+    }
+}
+
+
+Not: Stringlerle değişkenleri karıştırmamak lazım. Stringler hep " " içinde yazılırken değişkenler " " olmadan yazılır. Örn
+
+let isim = "Deniz"
+alert( "Benim adim " + isim ) // Benim adim Deniz
+alert( "Benim adim " + "isim" ) // Benim adim isim
+alert( Benim adim isim ) // Hata
+
+
+
+Arka Arkaya For'lar
+Arka arkaya for'lar A+B kere çalışırlar. Örn
+
+for (let i = 0; i<10; i++) {
+    console.log(i)
+}
+for (let i = 10; i<20; i++) {
+    console.log(i)
+}
+
+Iç Içe For'lar
+Iç içe forlar A*B kere çalışırlar. Dıştaki forun her döngüsü için içteki for birer kere çalışır. Örn
+
+for (let i = 0; i<10; i++) {
+    for (let j = 0; j<10; j++) {
+        console.log("i=" + i + " j=" + j)
+    }
+}
+
+
+Soru: 143 asal sayı mı?
+Asal sayılar: SADECE kendine ve 1 e tam bölünen sayılar. 1den kendine kadarki bütün sayıları dene. Eğer bir tanesi bile tam bölünüyorsa, ozaman asal değildir.
+Önemli: Yapması aslında kolay görünen ama gerçekte zor olan problemleri önce kendi ellerinizle çözün.
+
+// ilk başta asal olduğunu varsay. Eğer bir kere bile kalan 0 bulunursa false yap.
+let asaldir = true
+for (let i = 2; i<143; i++) {
+    if (143%i != 0) {
+        console.log('asal degil')
+        asaldir = false
+        break
+    }
+}
+
+
+
+Soru: 3-100 arası bütün asal sayıları ekrana yazdır.
+
+1. Adım: 3-100 arası sayıları denemek için for lazım.
+2. Adım: Bir sayının asal olup olmadığı nasıl anlaşılır? O sayı, kendisinden küçük bütün sayılara bölünür, kalan var mı diye bakılır. Her sayı için bütün sayıların taranması için bir for daha lazım.
+
+
+- 3e bakalım:
+3/2 kalan 0? Hayır.
+Asaldır.
+-4e bakalım:
+4/2 kalan 0? Evet.
+Asal değil.
+-5e bakalım:
+5/2 kalan 0? Hayır.
+5/3 kalan 0? Hayır.
+5/4 kalan 0? Hayır.
+Asaldır.
+-6ya bakalım:
+6/2 kalan 0? Evet.
+Asal değildir.
+
+
+for (let i = 3; i<100; i++) {
+
+    let asaldir = true
+    for (let j = 2; j<i; j++) {
+        if (i%j==0) {
+            asaldir = false
+            break
+        }
+    }
+
+    if (asaldir) {
+        console.log(i)
+    }
+}
+
+
+Soru: Collatz konjektürü. Herhangi bir pozitif tamsayı alın. Eğer tekse sayıyı 3le çarpıp 1 toplayın. Eğer çiftse yarıya bölün. En sonunda 1e ulaşacaksınız. Örn
+
+sayı: 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1
+sayi: 7 -> 22 -> 11 -> 34 -> 17 -> 52 -> 26 -> 13 -> 40 -> 20 -> 10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1
+
+Konjektüre göre bütün sayılar eninde sonunda 1e ulaşacaktır. Bu problem matematiksel olarak kanıtlanamamıştır, fakat biz javascript ile, bunun doğru olup olmadığını test edebiliriz. Önce 15in 1e gidip gitmediğini bulalım.
+
+let sayimiz = 15
+for (let i = 0; i<1000; i++) {
+
+    if (sayimiz==1) {
+        break
+    }
+    else if (sayimiz%2==0) {
+        sayimiz = sayimiz / 2
+    }
+    else {
+        sayimiz = sayimiz * 3 + 1
+    }
+}
+
+if (sayimiz==1) {
+    console.log('bire ulasti')
+}
+else {
+    console.log('ulasmadi')
+}
+
+
+Şimdi de 3-100 arası bütün sayıların 1e ulaşıp ulaşmadıgına bakalım
+
+for (let i = 3; i<100; i++) {
+
+    let sayimiz = i
+    for (let j = 0; j<1000; j++) {
+
+        if (sayimiz==1) {
+            break
+        }
+        else if (sayimiz%2==0) {
+            sayimiz = sayimiz / 2
+        }
+        else {
+            sayimiz = sayimiz * 3 + 1
+        }
+    }
+
+    if (sayimiz==1) {
+        console.log(i + ' bire ulasti')
+    }
+    else {
+        console.log(i + ' bire ulasmadi')
+    }
+
+}
+
+
+
+
+While loop:
+For'dan sonraki en önemli döngü (loop) yapısıdır. For'dan en önemli farkı: kaç kere döneceğini önceden belirlemememiz. For: "x defa kodu çalıştır". While: "Ben dur diyene kadar kodu çalıştır".
+Yukarıdaki örnekte collatz konjekturunde sayının 1e ulaşması için 1000 döngü kullandık. Sayının 1000 döngü içinde 1e ulaşacağını varsaydık. Fakat eğer 10000 döngü sonra 1e ulaşıyorsa ve bu programa göre 1e ulaşmamışsa? Bu gibi durumlarda while kullanmak daha tercih edilesidir.
+Yukarıdaki örnekte "1000 defa çalıştır, sayı = 1 olursa dur" dedik. While ile "sonsuz defa çalıştır, sayı = 1 olunca dur" diyebiliriz.
+
+while( boolean kosul ) {
+    ...
+}
+
+yada
+
+while ( devam etsin mi? ) {
+    ...
+}
+
+şeklinde düşünülebilir. Örn
+
+
+let a = 5
+while (a<10) {
+    console.log('.')
+    a = a+1
+}
+
+
+Yukarıdaki örnekte while bloğunun kaç kere çalışması gerektiğini söylemedik. Boolean şart verdik, ve eninde sonunda bu şartın false olacağını varsaydık. Yukarıdaki kod 5 satırlık olduğu için döngünün 5 kere çalışacağını tahmin edebiliyoruz, fakat genellikle while'ın kaç kere çalışacağını tahmin etmek imkansızdır. Bu yüzden döngünün hiç bitmeme olasılığı da vardır. Örn aşağıdaki kod hiç durmaz.
+
+let a = 5
+while (a<10) {
+    console.log('.')
+    a = a-1
+}
+
+yada
+
+let a = 5
+while (a<10) {
+    console.log('.')
+}
+
+
+Collatz örneğini değiştirelim. Yine 15 sayısının 1e gidip gitmediğine bakalım:
+
+let sayimiz = 15
+while ( sayimiz!=1) {
+
+    if (sayimiz%2==0) {
+        sayimiz = sayimiz / 2
+    }
+    else {
+        sayimiz = sayimiz * 3 + 1
+    }
+}
+
+console.log('bire ulasti')
+
+
+Bakteri problemi: t=1 anında bir madde örneğinde 1 bakteri var. t=2 de bakteri ürer ve toplam 2 bakteri olur. t=3 anında bakteriler tekrar ürer ve sayıları 4e çıkar. Soru: Bakteriler 1000e ulaştığında t kaçtır?
+
+let bakteri = 1, t=0
+
+while( bakteri<1000 ) {
+    bakteri *= 2
+    t += 1
+}
+
+
+Önemli matematik fonksiyonları:
+Math.floor(x)
+Math.ceil(x)
+Math.round(x)
+Math.random()
+
+Inek problemi: 1. günde 2 inek var, ve ineklerin cinsiyetsiz ürediğini düşünelim. 2. günde bu iki inek çiftleşir ve bir yavru doğar. t=2 de inek=3 olur. t=3 te ineklerden iki tanesi çiftleşir, diğeri eş bulamadığı için üreyemez. Böylece t=3 de inek=4 olur.
+- t=20 anında kaç inek var?
+- inek sayısının 45 olması için t kaç olmalı?
+
+
+let inek = 2, t=1
+for ( ; t<20; t++) {
+
+    if (inek%2==0) {
+        inek += inek / 2
+    }
+    else {
+        inek += (inek-1) / 2
+    }
+}
+
+
+let inek = 2, t=1
+while (inek<45) {
+    if (inek%2==0) {
+        inek += inek / 2
+    }
+    else {
+        inek += (inek-1) / 2
+    }
+
+    t++
+}
+t++
+
+
+
+

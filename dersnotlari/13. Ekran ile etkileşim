@@ -1,0 +1,26 @@
+
+Dokunmatik ekranlarda parmak dokunmalarını p5 ile takip edebilirsiniz. Önemli değişkenler:
+- touches : {id, x, y, winX, winY } şeklindeki objelerden oluşan dizi. Dizinin uzunluğu (touches.length) herhangi bir anda kaç parmağın ekranda olduğunu belirtir. Burada id parmakları ayırt etmek için kullanılıyor. x ve y, canvasa göre konum, winX ve winY de ekranın sol üst köşesine göre konum (sayfayı nekadar kaydırdığınızdan bağımsız).
+
+Önemli eventler:
+- touchStarted
+- touchMoved
+- touchEnded
+
+
+function setup() {
+    createCanvas(windowWidth, windowHeight)
+    textSize(20)
+}
+
+function draw() {
+    if (touches.length > 0) {
+        clear()
+    }
+
+    for (let i = 0; i< touches.length; i++) {
+        let t = touches[i]
+        let yazi = `id:${t.id} x:${round(t.x)} y:${round(t.y)} winX:${round(t.winX)} winY:${round(t.winY)}`
+        text( yazi, 30, 30+i*30)
+    }
+}

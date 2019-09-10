@@ -1,0 +1,263 @@
+
+Fonksiyon nedir?
+Fonksiyonlar, değişken alıp değişken veren yapılardır. Örn ekrana yazı yazmak için console.log ve alert fonksiyonuları, kullanıcıdan veri almak için prompt ve confirm fonksiyonları var. Örn uzaktaki bir server ile bağlantı kurmak için fetch fonksiyonu, kare çizmek için rect fonksiyonu, bir ses dosyası çaldırmak için play fonksiyonu var.
+
+Fonksiyonlar kullanım amacı bakımından ikiye ayrılır.
+- Veri alıp, veri vermesi için kullanılan fonksiyonlar. Örn, iki noktanın arasındaki mesafeyi hesaplaması için ilk noktanın x,y ve ikinci noktanın x,y sini alan fonksiyon. Bunlar matematikteki fonksiyonlara benzediği için Pure function (saf fonksiyon) diye bilinir.
+- Belli bir kod parçasını çalıştırmak için kullanılan fonksiyonlar. Örn, ekrandaki oyuncuyu 90 derece döndüren fonksiyon. Örn bir ses dosyasını çalan fonksiyon. Bunlara Procedure, yada Routine de denir.
+
+
+Örn ekrana "hoşgeldiniz" yazmak için alert fonksiyonu kullanılabilir. alert fonksiyonu parametre olarak, ekrana yazılacak yazıyı alır. Örn
+
+alert("Hosgeldiniz !")
+
+Önce fonksiyonun adı yazılır, daha sonra parantez açılır, ve içine parametreler konur. Yukarıdaki örnekte sadece bir tane ve kelime türünde parametre var. alert fonksiyonunun istediği tam da bu: kelime türünde bir parametre.
+
+Eğer alt alta iki alert varsa, önce birinci çalışır, sonra ikinci.
+
+alert("Mrb")
+alert("Nbr")
+
+
+Her fonksiyonun bir şey döndürmesi beklenir. Alert fonksiyonu saf matematiksel fonksiyon olmadığı için döndürecek birşeyi yok. Bu yüzden döndürdüğü şey undefined 'dir.
+
+confirm fonksiyonu evet/hayır türünde cevap almak için kullanılan fonksiyon. Evet cevabı verilirse true, eğer hayır cevabı verilirse false döndürür. Girdi olarak, ekrana yazılacak şeyi ister.
+
+confirm("Hazır mısınız?")
+
+Bu fonksiyona aynı alert gibi bir parametre alır. Geriye true yada false verir. Bunlar boolean türü veridir. Bu veri alındıktan sonra, evet olup olmadığına bakılarak birşeyler yapılabilir. Fonksiyonun geri döndüreceği veriyi daha sonra kullanmak için bir değişkene atamamız gerekir.
+
+let cevap
+cevap = confirm( "Devam ediyor musunuz?" )
+
+Bu iki satır kod şu şekilde çalışır
+
+let cevap
+cevap = confirm( "Devam ediyor musunuz?" )
+cevap = true
+
+
+Üçüncü önemli fonksiyon, prompt fonksiyonudur. Bu fonksiyon evet/hayır türü cevap değil de, yazı türü cevap alır. Onu da kullanıcıya geri döndürür.
+
+let yorum
+yorum = prompt("Bu restoran hakkında ne düşünüyorsunuz")
+
+
+Boolean operatorleri
+
+- onemli boolean operatorleri:
+> buyuktur
+< kucuktur
+>= buyuk esittir
+<= kucuk esittir
+== esittir
+!= esit degildir
+
+Ornekler:
+200 > 100 // true
+200 < 100 // false
+100 >= 100 // true
+100 <= 100 // true
+50 == 50 // true
+50 != 50 // false
+
+
+Onemli: == esittir operatoru ile = veri atama operatoru birbirinden farklıdır.
+a == b // eger a b ye eşitse true, değilse false döner.
+a = b // b nin içindekini al, a nın içine koy.
+a = 5 == 4 // false
+
+
+// Aritmetik islemler kullanilabilir
+10 + 10 == 20 // true
+10 * 2 != 20 // false
+
+// Yazilar (stringler) alfabetik siraya gore kiyaslanabilir
+'merhaba' == 'merhaba' // true
+'a' > 'b' // false
+'arab' > 'araba' // false
+
+// booleanlar karsilastirilabilir
+true == false // false
+(1+1 == 3) == false // true
+
+
+
+|| yada operatoru su sekilde calisir:
+
+true || true // true
+true || false // true
+false || true // true
+false || false // false
+
+&& ve operatoru su sekilde calisir:
+
+true && true // true
+true && false // false
+false && true // false
+false && false // false
+
+! degil operatoru su sekilde calisir:
+
+!(true) // false
+!(false) // true
+
+Not: ! operatorunden sonra ( ) kullanilmasi tavsiye edilir. Örn
+
+! 4>5 // false
+!(4 > 5) // true
+
+Not: a<b<c gibi kıyaslar a<b && b<c şeklinde ayrılmalıdır.
+
+
+
+
+If blokları
+
+"Eğer cevap şu ise şu kodu çalıştır, değilse atla" durumunda kullanılacak bloktur. Önce if yazılır. Sonra parantez içinde boolean koşulu yazılır. Sonra { } içinde, eğer o koşul sağlanırsa (yani true verirse) çalışacak kod yazılır.
+Örn eğer yaş +12 ise kullanıcıdan bilet parası isteyelim.
+
+let yas = 10, fiyat = 0
+if ( yas > 12 ) {
+    fiyat = 59.99
+}
+
+Eğer kullanıcı emekliyse ondan para istemeyelim.
+
+let yas = 70, fiyat = 0
+if ( yas > 12 ) {
+    fiyat = 59.99
+}
+if ( yas > 60 ) {
+    fiyat = 0
+}
+
+
+Eğer kullanıcı emekli veya gaziyse para istemeyelim.
+
+let yas = 20, fiyat = 0, gazi = false
+if ( yas > 12 ) {
+    fiyat = 59.99
+}
+if ( yas > 60 || gazi ) {
+    fiyat = 0
+}
+
+
+
+Örn not durumuna göre harf notu verme kodu
+
+let not = 49, harfnotu
+if (not == 0 ) {
+    harfnotu = 'VF'
+}
+if (not > 0 && not < 50) {
+    harfnotu = 'FF'
+}
+if (not > 50 && not < 70) {
+    harfnotu = 'BB'
+}
+if (not > 70 ) {
+    harfnotu = 'AA'
+}
+
+
+Soru: 
+Elimizde a ve b isimli iki sayı var. Bu sayıların arasından büyük olanını "buyuk", kucuk olanını "kucuk" isimli değişkenlere koyalım.
+
+let buyuk, kucuk
+if (a > b) {
+    buyuk = a
+    kucuk = b
+}
+if (b > a) {
+    buyuk = b
+    kucuk = a
+}
+
+
+Else blogu:
+
+Eğer elimizde şu yapı varsa:
+
+if ( kosul ) {
+    ... kod ...
+}
+if ( !kosul ) {
+    ... kod ...
+}
+
+Yani "eger koşul sağlanıyorsa şunu yap, sağlanmıyorsa şunu yap" minvalinde kod yazılacaksa o kod şu şekilde değiştirilebilir:
+
+if ( kosul ) {
+    ... kod ...
+}
+else {
+    ... kod ...
+}
+
+
+
+Yukarıdaki sayı örneğini tekrar ele alalım:
+
+let buyuk, kucuk
+if (a > b) {
+    buyuk = a
+    kucuk = b
+}
+else {
+    buyuk = b
+    kucuk = a
+}
+
+
+
+Örnek: Eğer zıpla tuşuna basılmışsa y yi arttıralım. basılmamışsa y yerçekiminden dolayı azalsın.
+
+if ( ziplaTusunaBasildi ) {
+    y = y + 10
+}
+else {
+    y = y - 10
+}
+
+
+Eğer 3,4,5... durumdan biri doğru olan bir koşul varsa, if - else if - else blokları kullanılır. Örn bir öğrencinin notu ya VF, ya FF, ya BB, yada AA dan biri olmak zorunda diyelim. Bu durumda harf notu 4 değerden birini almak zorunda. Bu durumda kod şöyle tasarlanabilir:
+
+- eğer not vf'lik ise harfnotu = vf
+- eğer vf'lik değilse, ve eğer ff'lik ise, harfnotu = ff
+- eğer ff'lik değilse, ve eğer bb'lik ise, harfnotu = bb
+- eğer bb'lik değilse, harfnotu = aa
+
+kod şu şekilde olur:
+
+let not = 49, harfnotu
+if (not == 0 ) {
+    harfnotu = 'VF'
+}
+else if (not < 50) {
+    harfnotu = 'FF'
+}
+else if (not < 70) {
+    harfnotu = 'BB'
+}
+else {
+    harfnotu = 'AA'
+}
+
+
+
+Prompt, confirm fonksiyonlarından gelen cevap if bloklarına gönderilebilir. Örn, eğer girilen şifre doğruysa kullanıcıyı selamlayan program yazalım:
+
+
+alert('Hosgeldiniz')
+let sifre = prompt('Sifreniz? ')
+
+if (sifre == 'qwerty') {
+    alert('Sifre dogru')
+}
+else {
+    alert('Sifre yanlis')
+}
+
+

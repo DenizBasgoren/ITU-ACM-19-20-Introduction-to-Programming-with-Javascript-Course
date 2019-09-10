@@ -1,0 +1,49 @@
+
+Klavye ile ilgili önemli değişkenler:
+
+- keyIsPressed: Herhangi bir tuş basılıysa true verir.
+- key: En son basılan tuş.
+- keyCode: En son basılan tuş kodu. (dilden, küçük/büyük harften bağımsız)
+
+Not: keycode.info sitesinden keycode listesine ulaşılabilir.
+
+
+
+
+Hatırlatma: Stringlerde yazı ve değişkenler iki şekilde birleştirilebilir.
+
+let isim = 'deniz'
+console.log( 'benim adim ' + isim)
+console.log( `benim adim ${isim}` )
+
+Hatırlatma: '\n' string içinde kullanıldığında \ ile n tek bir karakter gibi algılanır ve anlamı: alt satıra geç.
+
+console.log( 'birinci satir \n ikinci satir' )
+
+
+function setup () {
+    createCanvas(windowWidth, windowHeight)
+    textAlign(CENTER, CENTER)
+    textSize(100)
+}
+
+function keyPressed() {
+    clear()
+    text(`key: ${key} \n keycode: ${keycode}`, width/2, height/2);
+}
+
+
+
+Önemli: P5 ın bütün event handler fonksiyonlarını (keyPressed, mouseClicked, ... ) eğer return false ile bitirirsek, bazı önemli tuşlar gerçekte basılmamış gibi davranılır. Örn F5 tuşu sayfayı yeniler. Eğer return false yazılırsa F5 basıldığında F5'e basılmış sayılır fakat sayfa yenilenmez.
+
+
+function setup () {
+    createCanvas(windowWidth, windowHeight)
+    textAlign(CENTER, CENTER)
+    textSize(100)
+}
+
+function keyPressed() {
+    clear()
+    text(`key: ${key} \n keycode: ${keycode}`, width/2, height/2);
+}

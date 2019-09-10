@@ -1,0 +1,159 @@
+
+Yeni fonksiyon yazma:
+Var olan fonksiyonların yanına yeni fonksiyonlar yazabiliriz. Bu fonksiyonlar saf (pure) yada prosedürel olabilir.
+
+Hatırlatma:
+Saf fonksiyon: Etrafındaki değişkenleri değiştirmez.
+Prosedürel: Değiştirir. Örn,
+
+let a = 5
+alert('merhaba')
+// a degismedi. Bu yuzden alert saf fonksiyondur
+
+
+let a = 5
+birFonksiyon('birseyler')
+// a degistiyse birFonksiyon saf degildir.
+
+
+Yeni fonksiyon şablonu:
+
+function isim (parametreler) { 
+    ... kod
+    return sonuç
+}
+
+
+Bir sayı alıp, iki katını veren fonksiyon:
+
+function ikiKati ( a ) {
+    return 2*a
+}
+
+Fonksiyonu yazdıktan sonra hazır fonksiyonlar gibi kullanabiliriz. Örn
+
+let sayi = 10
+sayi = ikiKati( sayi )
+// sayi artik 20
+
+Bu fonksiyon saf mıdır?
+Evet, bu fonksiyon saftır, çünkü fonksiyonun içindeyken hiçbir değişkenin değeri değişmedi. Fonksiyon bittikten sonra 20 değerini döndü ve bu değeri sayi'ya atadık. Bu atama fonksiyonun içinden değil de, dışından olduğu için fonksiyon saftır.
+
+Aynı fonksiyonun saf olmayan versiyonunu yazalım:
+
+function ikiKati ( ) {
+    sayi = sayi * 2
+    return 0
+}
+
+let sayi = 10
+ikiKati()
+// sayi artik 20. fonksiyon onu degistirdi! fonksiyon saf degil.
+
+
+Önemli: Bir fonksiyon yazarken onun saf olup olmadığına dikkat etmeliyiz. Ideal bir programda bütün fonksiyonlar saf olmalıdır. Saf fonksiyon çalıştırıldığında, dokunmaması gereken değişkenleri değiştirmeyeceğine garanti verebiliriz. Bu da hata ayıklama esnasında hatanın kaynağını bulmada yardımcı olur.
+
+Üstteki örnekte " return 0" ı biryerde kullanmadık. Eğer fonksiyonun birşey döndürmesini istemiyorsak "return 0" satırını hiç yazmayabilirdik. Eğer bir fonksiyon tanımında return satırı yoksa, "return undefined" var sayılır.
+
+
+Soru: Girilen iki sayıdan hangisinin büyük olduğunu bulan fonksiyon yaz.
+
+function hangisiBuyuk( a, b) {
+    if (a>b) {
+        return a
+    }
+    else {
+        return b
+    }
+}
+
+
+Soru: Iki nokta arasindaki mesafeyi bulan fonksiyon.
+
+function mesafe( x0, y0, x1, y1) {
+    let rkare = (x1-x0)**2 + (y1-y0)**2
+    return Math.sqrt(rkare)
+}
+
+Yukarıdaki fonksiyonda rkare, sadece ara işlemde kullanıldığı için bir "ara değişkendir". Buna bazı dillerde özel değişken (ing. private variable) denir. Özel denmesinin sebebi, değişkenin sadece o fonksiyon içinde anlamının olmasıdır. Fonksiyon bittikten sonra o değişkenin anlamı kalmayacaktır. " Değişken o fonksiyona özeldir". Özel olmayan değişkenlere de public variable denir.
+
+Javascript'te public/private ayrımı yoktur. Her ikisi de let ile tanımlanır.
+
+Yukarıdaki fonksiyon ara değişken olmadan da yazılabilirdi.
+
+function mesafe( x0, y0, x1, y1) {
+    return  Math.sqrt( (x1-x0)**2 + (y1-y0)**2 )
+}
+
+Onemli: Fonksiyonun bu şekli daha kısa olsa da, fonksiyonun okunabilirliğinden ödün vermiş olduk. Ideal bir programda yeteri kadar ara değişken olmalıdır ki, kod rahatça okunabilsin.
+
+
+
+Soru: %50 olasılıkla "yazı", %50 olasılıkla "tura" veren bir fonksiyon yaz.
+
+function para () {
+    let rastgelesayi = Math.random()
+
+    if (rastgelesayi > .5 ) {
+        return "yazi"
+    }
+    else {
+        return "tura"
+    }
+}
+
+
+Soru: 6 yüzlü bir zarı simüle eden fonksiyon yaz.
+
+function zar ( ) {
+    let rastgelesayi = Math.random()
+
+    if (rastgelesayi < 1/6) {
+        return 1
+    }
+    else if (rastgelesayi < 2/6) {
+        return 2
+    }
+    else if (rastgelesayi < 3/6) {
+        return 3
+    }
+    else if (rastgelesayi < 4/6) {
+        return 4
+    }
+    else if (rastgelesayi < 5/6) {
+        return 5
+    }
+    else {
+        return 6
+    }
+}
+
+
+Yukarıdaki kod çok çirkin göründüğü için onu değiştirelim. Math.random fonksiyonu 0 ile 1 arasında sayı verir. Eğer bu sayıyı 6 ile çarparsak 0-6 arası bir sayı olmuş olur. Sonra bu sayıyı yukarı yuvarlarsak 1-2-3-4-5-6 değerlerinden birini almak zorunda kalır.
+
+function zar () {
+    let rastgelesayi = Math.ceil( Math.random()*6 )
+    return rastgelesayi
+}
+
+Şu şekilde de yazılabilirdi:
+
+function zar () {
+    return Math.ceil( Math.random()*6 )
+}
+
+
+
+Soru: %x olasılıkla true veren fonksiyon yaz.
+
+function olasilik ( x ) {
+    let rastgelesayi = Math.random()*100
+    if (rastgelesayi < x) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+

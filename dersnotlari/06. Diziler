@@ -1,0 +1,275 @@
+
+Diziler nedir?
+Beraber kullanılmak istenen değişkenlere ortak bir isim vererek, onları diziye çevirebiliriz. Örneğin bir sınıftaki 30 öğrencinin notlarını 30 tane değişken kullanarak kaydedebiliriz. Fakat durum böyleyken bu 30 notun ortalamasını almak için 30 satırlık kod yazmamız gerekir. Örn
+
+let alininNotu = 100
+let velininNotu = 90
+let ahmetinNotu = 85
+let mehmetinNotu = 70
+let ayseninNotu = 52
+
+let toplam = alininNotu + velininNotu + ahmetinNotu + mehmetinNotu + ayseninNotu
+let ortalama = toplam / 5
+
+Yukarıdaki kodda herkesin notunu ayrı ayrı yazdık, değişkenlere isimler bulmak zorunda kaldık, ve kaç kişi olduklarını elle saymak zorunda kaldık. Bunun yerine "notlar" yada "ogrencilerinNotlari" isimli, 5 değişken büyüklüğünde bir dizi kullansaydık, bütün bu sorunlardan kurtulurduk. Şöyle:
+
+let notlar = [100, 90, 85, 70, 52]
+let toplam = 0, ortalama
+
+toplam += notlar[0]
+toplam += notlar[1]
+toplam += notlar[2]
+toplam += notlar[3]
+toplam += notlar[4]
+
+ortalama = toplam / notlar.length
+
+
+Kod mükemmel olmasa da, bu haliyle bile daha tercih edilesi. Çünkü, her değişkene isim koymadık. Ve kaç kişi olduklarını elle saymadık. diziAdi.length ile dizinin uzunluğunu (5) buluyoruz.
+
+Not: dizilerin indisi (0,1,2,3,4) herzaman sıfırdan başlar. Bu, javascripte özel değildir. Çoğu programlama dillerinde böyledir.
+
+Üstteki kodda benzer kısımları for içine alıp kodu kısaltabiliriz.
+
+let notlar = [100, 90, 85, 70, 52]
+let toplam = 0, ortalama
+
+for (let i = 0; i <= notlar.length-1 ; i++) {
+    toplam += notlar[i]
+}
+
+ortalama = toplam / notlar.length
+
+
+For sınırlarını belirlerken biraz zorlandık. Yukarıdaki koddaki for satırı şu şekilde değiştirilebilir.
+for (let i = 0; i < notlar.length; i++) {
+    ...
+}
+
+
+Javascriptte değişken türü yoktur, bu yüzden bir dizide hem sayılar, hem stringler, hem booleanlar bulunabilir.
+
+[] //bos dizi
+[1,2,3] // 3 elemanli dizi
+[4, 3.4, 5.66, 4.32, 4+4] // 5 elemanli dizi
+[ 'merhaba', 'hello', 'privet', 'salam', 'bonjour'] // string dizisi
+[ 42, 'pizza', true, false, 3.9999] // karisik dizi
+[ [1,2,3], [3,4], [1], [], ['hello']] // dizi dizisi
+
+
+
+Dizi elemanını değiştirme
+isim[indis] = yeniDeger şeklinde yapılır. Örn
+
+let notlar = [100, 90, 20, 30]
+notlar[2] = 50
+// [100, 90, 50, 30]
+
+
+Diziyi Büyütme
+Dizinin son elemanının indisinden sonraki indise yeni eleman koyulabilir.
+
+let notlar = [100, 90, 50]
+notlar[3] = 50
+//yada
+notlar[ notlar.length ] = 50
+
+Not: Diziyi büyütürseniz, length değişkeni de büyür.
+
+let notlar = [100, 90, 50]
+notlar[10] = 50
+notlar.length // 11
+
+
+Bir dizinin kopyasını yapma
+
+let dizi = [1,2,3,4]
+let kopya = []
+
+for (let i = 0; i<dizi.length; i++) {
+    kopya[i] = dizi[i]
+}
+
+
+Bir diziyi diğerinin sonuna ekleme
+
+let dizi = [5,6,7]
+let ikinci = [1,2,3,4]
+
+for (let i = 0; i<dizi.length; i++) {
+    ikinci[i+4] = dizi[i]
+}
+
+yada
+
+let dizi = [5,6,7]
+let ikinci = [1,2,3,4]
+let L = ikinci.length
+
+for (let i = 0; i<dizi.length; i++) {
+    ikinci[i+L] = dizi[i]
+}
+
+
+
+Diziyi ters çevirme
+
+let dizi = [10,20,30,40,50]
+let ters = []
+ 
+
+for (let i = 0; i<dizi.length; i++) {
+    ters[ dizi.length -1-i] = dizi[i]
+}
+
+
+Iki diziyi ABABAB birleştirme
+Örn. [1,1,1] + [2,2,2] -> [1,2,1,2,1,2]
+
+let birinci = [1,1,1]
+let ikinci = [2,2,2]
+let yeni = []
+
+for (let i = 0; i<birinci.length; i++) {
+    yeni[ yeni.length] = birinci[i]
+    yeni[ yeni.length] = ikinci[i]
+}
+
+
+Dizideki her elemanı x arttırma.
+Örn: [10,11,12,13,14] -> [20,21,22,23,24] // 10 arttırma
+
+let a = [10,11,12,13,14]
+
+for (let i = 0; i<a.length; i++) {
+    a[i] = a[i] + 10
+}
+
+
+Dizinin en başına eleman koyma
+örn. [1,2,3] -> [0,1,2,3]
+
+let a = [1,2,3]
+let yeni = [0]
+
+for (let i = 0; i<a.length; i++) {
+    yeni[yeni.length] = a[i]
+}
+
+
+Dizide belli bir elemanın indisini bulma
+örn [1,2,3,4,666,5,6] dizisinde 666 4. indiste
+
+let a = [1,2,3,4,666,5,6]
+
+for (let i = 0; i<a.length; i++) {
+    if (a[i] == 666) {
+        console.log(i)
+        break
+    }
+}
+
+
+Dizideki en büyük sayıyı bulma
+Önce en büyük sayının ilk indisteki sayının olduğu varsayılır. Daha sonra dizinin her elemanı taranır.
+
+let a = [5,4,6,3,6,8,3,1]
+let enbuyuk = 5
+
+for (let i = 0; i<a.length; i++) {
+    if (a[i] > enbuyuk) {
+        enbuyuk = a[i]
+    }
+}
+
+
+Bu kodu bir fonksiyona çevirmeyi deneyelim:
+
+function enBuyuk( a ) {
+    let enbuyuk = a[0]
+
+    for (let i = 0; i<a.length; i++) {
+        if (a[i] > enbuyuk) {
+            enbuyuk = a[i]
+        }
+    }
+
+    return enbuyuk
+}
+
+
+Bir diziyi büyükten küçüğe sıralama.
+Bu biraz karmaşık bir işlem olduğu için problemi parçalara ayıralım. Önce, dizideki en büyük elemanın nerede olduğunu bulan fonksiyon yazalım. Sonra, o elemanı alıp, yeni diziye koyalım. O elemanı da diziden silelim. Bunun için üç fonksiyon kullanacağız.
+
+function enBuyukIndis ( a ) {
+    let enbuyuk = a[0]
+    let enbuyukindis = 0
+
+    for (let i = 0; i<a.length; i++) {
+        if (enbuyuk <= a[i]) {
+            enbuyuk = a[i]
+            enbuyukindis = i
+        }
+    }
+
+    return enbuyukindis
+}
+
+
+// [2,3,4,5] indis=2 -> [2,3,5]
+function birElemaniSil (a, indis) {
+    let yeni = []
+
+    for (let i = 0; i<indis; i++) {
+        yeni[yeni.length] = a[i]
+    }
+    for (let i = indis+1; i<a.length; i++) {
+        yeni[yeni.length] = a[i]
+    }
+
+    return yeni
+}
+
+
+function buyuktenKucuge(a) {
+    let yeni = []
+
+    while ( a.length > 0) {
+        let enbuyukindis = enBuyukIndis(a)
+        yeni[yeni.length] = a[enbuyukindis]
+        a = birElemaniSil(a, enbuyukindis)
+    }
+    
+    return yeni
+}
+
+
+
+2 Boyutlu Diziler
+
+Diziler sadece bir boyutlu olmak zorunda değildir. Iki boyutlu, üç boyutlu, N boyutlu diziler yazmak mümkündür. Örn iki boyutlu dizi için, dizilerden oluşan dizi kullanılır. Örn
+
+let a = [ [1,2,3] , [4,5,6] , [7,8,9]] // 3x3 dizi
+
+Bu dizi şu şekilde de düşünülebilir:
+
+[ [1,2,3],
+  [4,5,6],
+  [7,8,9] ]
+
+Matris notasyonundaki gibi, dikey eksen m ve yatay eksen n şeklinde düşünülebilir. Bu matriste birinci satır ve 3. sütun elemanına ulaşmak için dizi[satir][sutun] notasyonunu kullanırız.
+
+let a = [
+  [1,2,3],
+  [4,5,6],
+  [7,8,9] ]
+
+a[0][2] // 3
+
+Bu şu şekilde de düşünülebilir:
+
+a[0][2]
+[1,2,3][2]
+3
+
+
